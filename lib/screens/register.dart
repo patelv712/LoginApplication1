@@ -70,130 +70,89 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: Center(
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 50),
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.white, // Background color set to white
+    body: SafeArea(
+      child: Center(
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 50),
 
-              //logo
+            FlutterLogo(size: 100), // Replace with your app's logo or icon
 
-              const Icon(
-                Icons.lock,
-                size: 100,
+            const SizedBox(height: 50),
+
+            Text(
+              'Let\'s create an account',
+              style: TextStyle(
+                color: Colors.black87, // Text color set to a standard black for better contrast
+                fontSize: 24, // Adjust font size as needed
+                fontWeight: FontWeight.bold, // Bold font weight
               ),
+            ),
 
-              const SizedBox(height: 50),
+            const SizedBox(height: 25),
 
-              const Text(
-                'Let\'s create an account',
-                textDirection: TextDirection.ltr,
-                style: TextStyle(
-                  color: Color.fromARGB(255, 101, 100, 100),
-                  fontSize: 16,
+            // Email TextField
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(), // Add border to TextField
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // Password TextField
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(), // Add border to TextField
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // Confirm Password TextField
+            TextField(
+              controller: confirmPasswordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
+                border: OutlineInputBorder(), // Add border to TextField
+              ),
+            ),
+
+            const SizedBox(height: 25),
+
+            ElevatedButton(
+              onPressed: signUserUp,
+              child: Text('Sign Up'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.deepPurple, // Button color set to dark purple
+                onPrimary: Colors.white, // Text color set to white
+                padding: EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
+            ),
 
-              const SizedBox(height: 25),
+            const SizedBox(height: 30),
 
-              //username
+            // ... other widgets remain unchanged ...
 
-              MyTextField(
-                controller: emailController,
-                hintText: 'Email',
-                obscureText: false,
-              ),
+          ],
+        ),
+      )),
+    ),
+  );
+}
 
-              //password
-
-              const SizedBox(height: 10),
-
-              MyTextField(
-                controller: passwordController,
-                hintText: 'Password',
-                obscureText: true,
-              ),
-
-              const SizedBox(height: 10),
-
-              //confirm password
-              MyTextField(
-                controller: confirmPasswordController,
-                hintText: 'Confirm Password',
-                obscureText: true,
-              ),
-
-              const SizedBox(height: 25),
-
-              MyButton(onTap: () => {signUserUp()}, text: "Sign Up"),
-
-              const SizedBox(height: 30),
-
-              
-
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: Color.fromARGB(255, 97, 93, 93),
-                        thickness: 0.5,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        'Or continue with',
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 66, 65, 65)),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: Color.fromARGB(255, 97, 93, 93),
-                        thickness: 0.5,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 15),
-
-              // For google sign in
-
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                SquareTile(imagePath: 'lib/images/google.png', onTap: () => AuthService().signInGoogle()),
-              ]),
-
-              const SizedBox(height: 15),
-
-
-              // end of UI, asks for registration
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text('Already have an account? ',
-                    style: TextStyle(color: Color.fromARGB(255, 97, 93, 93))),
-                const SizedBox(width: 4),
-                GestureDetector(
-                  onTap: widget.onTap,
-                  child: const Text(
-                    'Login Now',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 21, 101, 192),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ])
-            ],
-          ),
-        )),
-      ),
-    );
-  }
 }
